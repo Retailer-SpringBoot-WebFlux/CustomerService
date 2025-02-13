@@ -2,11 +2,14 @@ package com.example.CustomerService;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("customers") // R2DBC Table annotation
+import java.time.LocalDateTime;
+
+@Table("customers")
 @Data
 public class Customer {
 
@@ -20,4 +23,13 @@ public class Customer {
     @Email(message = "Invalid email format")
     private String email;
 
+    @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "Invalid phone number format")
+    private String phone;
+
+    private String address;
+
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }
